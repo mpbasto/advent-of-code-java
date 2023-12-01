@@ -8,68 +8,96 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
-public class Day01Test {
+public class Day01Test
+{
 
     @Test
-    public void givenInputLines_whenCalculatingCalibrationValue_thenCorrectValuesReturned(){
+    public void givenInputLines_whenCalculatingCalibrationValue_thenCorrectValuesReturned( )
+    {
         // Given
-        List<String> inputLines = List.of( "1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet" );
+        List<String> inputLines = List.of( "1abc2",
+                                           "pqr3stu8vwx",
+                                           "a1b2c3d4e5f",
+                                           "treb7uchet" );
 
         // When
-        String actualResult = new Day01().part1(inputLines);
+        String actualResult = new Day01( ).part1( inputLines );
 
         // Then
-        assertEquals("142", actualResult);
+        assertEquals( "142",
+                      actualResult );
     }
 
     @Test
-    public void givenEmptyInputLines_whenCalculatingCalibrationValue_thenThrowIllegalArgumentException(){
+    public void givenEmptyInputLines_whenCalculatingCalibrationValue_thenThrowIllegalArgumentException( )
+    {
         // Given
-        List<String> emptyLines = List.of( "", "", "", "" );
+        List<String> emptyLines = List.of( "",
+                                           "",
+                                           "",
+                                           "" );
 
         // When
-        IllegalArgumentException actualResult = assertThrows(IllegalArgumentException.class, () -> new Day01().part1(emptyLines));
+        IllegalArgumentException actualResult = assertThrows( IllegalArgumentException.class,
+                                                              ( ) -> new Day01( ).part1( emptyLines ) );
 
         // Then
-        assertEquals( "Line is empty", actualResult.getMessage() );
+        assertEquals( "Line is empty",
+                      actualResult.getMessage( ) );
     }
 
     @Test
-    public void givenInputLinesWithoutDigits_whenCalculatingCalibrationValue_thenThrowIllegalArgumentException(){
+    public void givenInputLinesWithoutDigits_whenCalculatingCalibrationValue_thenThrowIllegalArgumentException( )
+    {
         // Given
-        List<String> linesWithoutDigits = List.of( "sdfghngfs", "asggndf", "creakeg", "pogthbs" );
+        List<String> linesWithoutDigits = List.of( "sdfghngfs",
+                                                   "asggndf",
+                                                   "creakeg",
+                                                   "pogthbs" );
 
         // When
-        IllegalArgumentException actualResult = assertThrows(IllegalArgumentException.class, () -> new Day01().part1(linesWithoutDigits));
+        IllegalArgumentException actualResult = assertThrows( IllegalArgumentException.class,
+                                                              ( ) -> new Day01( ).part1( linesWithoutDigits ) );
 
         // Then
-        assertEquals( "Line does not contain any digits", actualResult.getMessage() );
+        assertEquals( "Line does not contain any digits",
+                      actualResult.getMessage( ) );
     }
 
     @Test
-    public void givenEmptyInput_whenCalculatingCalibrationValue_thenThrowIllegalArgumentException(){
+    public void givenEmptyInput_whenCalculatingCalibrationValue_thenThrowIllegalArgumentException( )
+    {
 
         //Given
-        List<String> emptyInput = Collections.emptyList();
+        List<String> emptyInput = Collections.emptyList( );
 
         // When
-        IllegalArgumentException actualResult = assertThrows(IllegalArgumentException.class, () -> new Day01().part1(emptyInput));
+        IllegalArgumentException actualResult = assertThrows( IllegalArgumentException.class,
+                                                              ( ) -> new Day01( ).part1( emptyInput ) );
 
         // Then
-        assertEquals( "Input is empty", actualResult.getMessage() );
+        assertEquals( "Input is empty",
+                      actualResult.getMessage( ) );
     }
 
     @Test
-    public void testPart2(){
+    public void givenInputLinesWithSpelledOutDigits_whenCalculatingCalibrationValue_thenCorrectValuesReturned( )
+    {
         // Given
-        List<String> input = Collections.singletonList("test");
+        List<String> inputLines = List.of( "two1nine",
+                                           "eightwothree",
+                                           "abcone2threexyz",
+                                           "xtwone3four",
+                                           "4nineeightseven2",
+                                           "zoneight234",
+                                           "7pqrstsixteen" );
 
         // When
-        String result = new Day01().part2(input);
+        String actualResult = new Day01( ).part2( inputLines );
 
         // Then
-        assertEquals(input.get(0), result);
+        assertEquals( "281",
+                      actualResult );
     }
-
 
 }
