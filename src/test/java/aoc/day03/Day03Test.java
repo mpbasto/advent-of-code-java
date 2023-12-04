@@ -73,16 +73,64 @@ public class Day03Test
     }
 
     @Test
-    public void part2( )
+    public void givenInput_whenCalculatingSumOfRatios_thenReturnExpectedResult( )
     {
         // Given
-        List<String> input = Collections.singletonList( "test" );
+        List<String> input = List.of( "467..114..",
+                                      "...*......",
+                                      "..35..633.",
+                                      "......#...",
+                                      "617*......",
+                                      ".....+.58.",
+                                      "..592.....",
+                                      "......755.",
+                                      "...$.*....",
+                                      ".664.598.." );
 
         // When
         String result = new Day03( ).part2( input );
 
         // Then
-        assertEquals( input.get( 0 ),
+        assertEquals( "467835",
+                      result );
+    }
+
+    @Test
+    public void givenEmptyInput_whenCalculatingSumOfRatios_thenThrowError( )
+    {
+        //Given
+        List<String> emptyInput = Collections.emptyList( );
+
+        // When
+        IllegalArgumentException actualResult = assertThrows( IllegalArgumentException.class,
+                                                              ( ) -> new Day03( ).part2( emptyInput ) );
+
+        // Then
+        assertEquals( "Input is empty",
+                      actualResult.getMessage( ) );
+
+    }
+
+    @Test
+    public void givenNoPartNumbers_whenCalculateSumOfRatios_thenReturnsZero( )
+    {
+        // Given
+        List<String> input = List.of( "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      ".........." );
+
+        // When
+        String result = new Day03( ).part2( input );
+
+        // Then
+        assertEquals( "0",
                       result );
     }
 }

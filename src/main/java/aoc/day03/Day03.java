@@ -14,6 +14,7 @@ public class Day03
     implements Day
 {
     private static final Logger logger = Logger.getLogger( Day03.class.getName( ) );
+    private static final Map<String, Integer> SYMBOLS = getCharMap( );
 
     @Override
     public String part1( final List<String> input )
@@ -23,22 +24,17 @@ public class Day03
             throw new IllegalArgumentException( "Input is empty" );
         }
 
-        // Store symbols
-        Map<String, Integer> symbols = getCharMap( );
-
         // Define grid
         int rows = input.size( );
         int cols = calculateMaxStringLength( input );
         int[] map = new int[ rows * cols ];
-
         int sumOfEngineParts;
 
-        List<Coordinates> list = processInputGrid( input,
-                                                   map,
-                                                   symbols,
-                                                   cols );
+        List<Coordinates> engineSchematic = processInputGrid( input,
+                                                              map,
+                                                              cols );
 
-        sumOfEngineParts = calculateAdjacentValues( list,
+        sumOfEngineParts = calculateAdjacentValues( engineSchematic,
                                                     map,
                                                     cols,
                                                     rows );
@@ -49,7 +45,39 @@ public class Day03
     @Override
     public String part2( final List<String> input )
     {
-        return input.isEmpty( ) ? "Input is empty" : input.get( 0 );
+        if ( input == null || input.isEmpty( ) )
+        {
+            throw new IllegalArgumentException( "Input is empty" );
+        }
+
+        // Define grid
+        int rows = input.size( );
+        int cols = calculateMaxStringLength( input );
+        int[] map = new int[ rows * cols ];
+        int sumOfAllRatios = 0;
+
+        List<Coordinates> engineSchematic = processInputGrid( input,
+                                                              map,
+                                                              cols );
+
+        for ( Coordinates coordinates : engineSchematic )
+        {
+            coordinates.findGears( map,
+                                   cols,
+                                   rows );
+        }
+
+        for ( int i = 0; i < engineSchematic.size( ); i++ )
+        {
+            for ( int j = i + 1; j < engineSchematic.size( ); j++ )
+            {
+                sumOfAllRatios += engineSchematic
+                    .get( i )
+                    .getGear( engineSchematic.get( j ) );
+            }
+        }
+
+        return String.valueOf( sumOfAllRatios );
     }
 
     private int calculateAdjacentValues( final List<Coordinates> list,
@@ -62,8 +90,8 @@ public class Day03
         for ( Coordinates coordinates : list )
         {
             if ( coordinates.isAdjacent( map,
-                                columns,
-                                rows ) )
+                                         columns,
+                                         rows ) )
             {
                 values += coordinates.getNumber( );
             }
@@ -111,14 +139,8 @@ public class Day03
 
     private List<Coordinates> processInputGrid( List<String> input,
                                                 int[] map,
-                                                Map<String, Integer> symbols,
                                                 int columns )
     {
-
-        if ( input == null || map == null || symbols == null )
-        {
-            throw new IllegalArgumentException( "Input parameters cannot be null" );
-        }
 
         List<Coordinates> list = new ArrayList<>( );
         Coordinates coordinates = null;
@@ -139,8 +161,8 @@ public class Day03
                     }
 
                     coordinates.addNumber( x,
-                                      y,
-                                      String.valueOf( c ) );
+                                           y,
+                                           String.valueOf( c ) );
 
                 }
                 else
@@ -154,7 +176,6 @@ public class Day03
 
                 handleSymbol( c,
                               map,
-                              symbols,
                               x,
                               y,
                               columns );
@@ -173,15 +194,14 @@ public class Day03
 
     private void handleSymbol( final char c,
                                final int[] map,
-                               final Map<String, Integer> symbols,
                                final int x,
                                final int y,
                                final int columns )
     {
         String charString = String.valueOf( c );
-        if ( symbols.containsKey( charString ) )
+        if ( SYMBOLS.containsKey( charString ) )
         {
-            map[ y * columns + x ] = symbols.get( charString );
+            map[ y * columns + x ] = SYMBOLS.get( charString );
         }
         else if ( !charString.equals( "." ) && !Character.isDigit( c ) )
         {
