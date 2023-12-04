@@ -5,22 +5,70 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class Day03Test
 {
 
     @Test
-    public void part1( )
+    public void givenInput_whenCalculatingSum_thenReturnExpectedResult( )
     {
         // Given
-        List<String> input = Collections.singletonList( "test" );
+        List<String> input = List.of( "467..114..",
+                                      "...*......",
+                                      "..35..633.",
+                                      "......#...",
+                                      "617*......",
+                                      ".....+.58.",
+                                      "..592.....",
+                                      "......755.",
+                                      "...$.*....",
+                                      ".664.598.." );
 
         // When
         String result = new Day03( ).part1( input );
 
         // Then
-        assertEquals( input.get( 0 ),
+        assertEquals( "4361",
+                      result );
+    }
+
+    @Test
+    public void givenEmptyInput_whenCalculatingSum_thenThrowError( )
+    {
+        //Given
+        List<String> emptyInput = Collections.emptyList( );
+
+        // When
+        IllegalArgumentException actualResult = assertThrows( IllegalArgumentException.class,
+                                                              ( ) -> new Day03( ).part1( emptyInput ) );
+
+        // Then
+        assertEquals( "Input is empty",
+                      actualResult.getMessage( ) );
+
+    }
+
+    @Test
+    public void givenNoPartNumbers_whenCalculateSum_thenReturnsZero( )
+    {
+        // Given
+        List<String> input = List.of( "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      "..........",
+                                      ".........." );
+
+        // When
+        String result = new Day03( ).part1( input );
+
+        // Then
+        assertEquals( "0",
                       result );
     }
 
@@ -31,7 +79,7 @@ public class Day03Test
         List<String> input = Collections.singletonList( "test" );
 
         // When
-        String result = new Day03( ).part1( input );
+        String result = new Day03( ).part2( input );
 
         // Then
         assertEquals( input.get( 0 ),
