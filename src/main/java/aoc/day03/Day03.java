@@ -1,7 +1,6 @@
 package aoc.day03;
 
 import aoc.Day;
-import aoc.Coordinates;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,9 +1,10 @@
-package aoc.day05;
+package aoc.day07;
 
-import java.util.*;
+import aoc.Day;
 
-public class Day05
-    implements aoc.Day
+import java.util.List;
+
+public class Day07 implements Day
 {
     @Override
     public String part1( final List<String> input )
@@ -22,6 +23,7 @@ public class Day05
         {
             throw new IllegalArgumentException( "Input is empty" );
         }
+
         return input.get( 0 );
     }
 }

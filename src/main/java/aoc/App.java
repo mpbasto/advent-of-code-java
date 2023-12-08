@@ -8,6 +8,10 @@ import aoc.day02.Day02;
 import aoc.day03.Day03;
 import aoc.day04.Day04;
 import aoc.day05.Day05;
+import aoc.day06.Day06;
+import aoc.day07.Day07;
+import aoc.day08.Day08;
+import aoc.day09.Day09;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,6 +41,14 @@ public class App
                   new Day04( ) );
         DAYS.put( 5,
                   new Day05( ) );
+        DAYS.put( 6,
+                  new Day06( ) );
+        DAYS.put( 7,
+                  new Day07( ) );
+        DAYS.put( 8,
+                  new Day08( ) );
+        DAYS.put( 9,
+                  new Day09( ) );
     }
 
     private static List<String> loadInput( int day )
